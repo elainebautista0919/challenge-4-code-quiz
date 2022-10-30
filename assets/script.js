@@ -86,7 +86,7 @@ function render(questionIndex) {
     })
 }
 
-// Event to compare choices with answer
+// Compare choices with answer
 function compare(event) {
     var element = event.target;
 
@@ -100,7 +100,7 @@ function compare(event) {
             createDiv.textContent = "Correct! The answer is:  " + questions[questionIndex].answer;
             // Correct condition 
         } else {
-            // Will deduct -5 seconds off secondsLeft for wrong answers
+            // To deduct 5 seconds off secondsLeft for wrong answers
             secondsLeft = secondsLeft - penalty;
             createDiv.textContent = "Incorrect! The answer is:  " + questions[questionIndex].answer;
         }
@@ -111,12 +111,68 @@ function compare(event) {
     questionIndex++;
 
     if (questionIndex >= questions.length) {
-        // All done will append last page with user stats
+        // All done to append last page with user stats
         allDone();
-        createDiv.textContent = "End of quiz!" + " " + "You got  " + score + "/" + questions.length + " Correct!";
+        createDiv.textContent = "You got  " + score + "/" + questions.length + " correct!";
     } else {
         render(questionIndex);
     }
     questionsDiv.appendChild(createDiv);
+}
+
+// All done will append the last page
+function allDone() {
+    questionsDiv.innerHTML = "";
+    currentTime.innerHTML = "";
+
+    // Create another
+    var createH1 = document.createElement("h1");
+    createH1.setAttribute("id", "createH1");
+    createH1.textContent = "Quiz Complete!"
+
+    questionsDiv.appendChild(createH1);
+
+    // Create another paragraph
+    var createP = document.createElement("p");
+    createP.setAttribute("id", "createP");
+
+    questionsDiv.appendChild(createP);
+
+    // Calculates time remaining and replaces it with score
+    if (secondsLeft >= 0) {
+        var timeRemaining = secondsLeft;
+        var createP2 = document.createElement("p");
+        clearInterval(holdInterval);
+        createP.textContent = "Your final score is: " + timeRemaining;
+
+        questionsDiv.appendChild(createP2);
+    }
+
+    // initials
+    var createLabel = document.createElement("label");
+    createLabel.setAttribute("id", "createLabel");
+    createLabel.textContent = "Enter your initials: ";
+
+    questionsDiv.appendChild(createLabel);
+
+    // input
+    var createInput = document.createElement("input");
+    createInput.setAttribute("type", "text");
+    createInput.setAttribute("id", "initials");
+    createInput.textContent = "";
+
+    questionsDiv.appendChild(createInput);
+
+    // submit
+    var createSubmit = document.createElement("button");
+    createSubmit.setAttribute("type", "submit");
+    createSubmit.setAttribute("id", "Submit");
+    createSubmit.textContent = "Submit";
+
+    questionsDiv.appendChild(createSubmit);
 
 }
+
+
+
+
