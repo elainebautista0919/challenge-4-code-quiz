@@ -64,13 +64,8 @@ li:hover {
 }
 
 #submit {
-    border-radius: 5px;
-    padding: 5px 10px 5px 10px;
-    position: absolute;
+    background-color: #ffb703;
 }
-
-
-
 
 
 @media screen and (max-width: 786px) {
