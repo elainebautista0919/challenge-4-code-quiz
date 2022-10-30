@@ -57,7 +57,7 @@ timer.addEventListener("click", function () {
             if (secondsLeft <= 0) {
                 clearInterval(holdInterval);
                 allDone();
-                currentTime.textContent = "Time's up!";
+                currentTime.textContent = "Time is up!";
             }
         }, 1000);
     }
@@ -66,12 +66,12 @@ timer.addEventListener("click", function () {
 
 // Renders questions and choices to page: 
 function render(questionIndex) {
-    // Clears existing data 
+    // Clears existing data
     questionsDiv.innerHTML = "";
     ulCreate.innerHTML = "";
-    // For loops to loop through all info in array
+    // To loop through all info in array
     for (var i = 0; i < questions.length; i++) {
-        // Appends question title only
+        // To append question title
         var userQuestion = questions[questionIndex].title;
         var userChoices = questions[questionIndex].choices;
         questionsDiv.textContent = userQuestion;
@@ -84,4 +84,39 @@ function render(questionIndex) {
         ulCreate.appendChild(listItem);
         listItem.addEventListener("click", (compare));
     })
+}
+
+// Event to compare choices with answer
+function compare(event) {
+    var element = event.target;
+
+    if (element.matches("li")) {
+
+        var createDiv = document.createElement("div");
+        createDiv.setAttribute("id", "createDiv");
+        // Correct condition 
+        if (element.textContent == questions[questionIndex].answer) {
+            score++;
+            createDiv.textContent = "Correct! The answer is:  " + questions[questionIndex].answer;
+            // Correct condition 
+        } else {
+            // Will deduct -5 seconds off secondsLeft for wrong answers
+            secondsLeft = secondsLeft - penalty;
+            createDiv.textContent = "Incorrect! The answer is:  " + questions[questionIndex].answer;
+        }
+
+    }
+
+    // Question Index determines number question user is on
+    questionIndex++;
+
+    if (questionIndex >= questions.length) {
+        // All done will append last page with user stats
+        allDone();
+        createDiv.textContent = "End of quiz!" + " " + "You got  " + score + "/" + questions.length + " Correct!";
+    } else {
+        render(questionIndex);
+    }
+    questionsDiv.appendChild(createDiv);
+
 }
