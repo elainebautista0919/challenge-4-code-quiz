@@ -67,6 +67,11 @@ a {
     margin: 30px;
 }
 
+#submit:hover {
+    background-color: #ffb703;
+    transition: 0.7s;
+}
+
 #clear {
     position: relative;
     padding: 10px;

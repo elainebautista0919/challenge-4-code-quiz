@@ -37,18 +37,20 @@ var timer = document.querySelector("#startTime");
 var questionsDiv = document.querySelector("#questionsDiv");
 var wrapper = document.querySelector("#wrapper");
 
-// Seconds left is 15 seconds per question:
+// Seconds left is 15 seconds per question
 var secondsLeft = 76;
+
 // Holds interval time
 var holdInterval = 0;
+
 // Holds penalty time
 var penalty = 10;
+
 // Creates new element
 var ulCreate = document.createElement("ul");
 
-// Triggers timer on button, shows user a display on the screen
+// Start timer when Start button is clicked
 timer.addEventListener("click", function () {
-    // We are checking zero because its originally set to zero
     if (holdInterval === 0) {
         holdInterval = setInterval(function () {
             secondsLeft--;
@@ -64,9 +66,9 @@ timer.addEventListener("click", function () {
     render(questionIndex);
 });
 
-// Renders questions and choices to page: 
+// Render questions and multiple choices to page: 
 function render(questionIndex) {
-    // Clears existing data
+    // Clear existing data
     questionsDiv.innerHTML = "";
     ulCreate.innerHTML = "";
     // To loop through all info in array
@@ -86,7 +88,7 @@ function render(questionIndex) {
     })
 }
 
-// Compare choices with answer
+// Compare clicked choice with correct answer
 function compare(event) {
     var element = event.target;
 
@@ -125,7 +127,7 @@ function allDone() {
     questionsDiv.innerHTML = "";
     currentTime.innerHTML = "";
 
-    // Create another
+    // Create another H1
     var createH1 = document.createElement("h1");
     createH1.setAttribute("id", "createH1");
     createH1.textContent = "Quiz Complete!"
@@ -138,7 +140,7 @@ function allDone() {
 
     questionsDiv.appendChild(createP);
 
-    // Calculates time remaining and replaces it with score
+    // Calculates time remaining and replaces it with the score
     if (secondsLeft >= 0) {
         var timeRemaining = secondsLeft;
         var createP2 = document.createElement("p");
@@ -148,14 +150,15 @@ function allDone() {
         questionsDiv.appendChild(createP2);
     }
 
-    // initials
+    // Label for initials
     var createLabel = document.createElement("label");
     createLabel.setAttribute("id", "createLabel");
+    createLabel.setAttribute("style", "margin-bottom: 20px");
     createLabel.textContent = "Enter your initials: ";
 
     questionsDiv.appendChild(createLabel);
 
-    // input
+    // Input for initials
     var createInput = document.createElement("input");
     createInput.setAttribute("type", "text");
     createInput.setAttribute("id", "initials");
@@ -163,13 +166,45 @@ function allDone() {
 
     questionsDiv.appendChild(createInput);
 
-    // submit
+    // Submit button
     var createSubmit = document.createElement("button");
     createSubmit.setAttribute("type", "submit");
     createSubmit.setAttribute("id", "submit");
+    createSubmit.setAttribute("style", "margin-top: 80px");
     createSubmit.textContent = "Submit";
 
     questionsDiv.appendChild(createSubmit);
 
+    createSubmit.addEventListener("click", function () {
+        var initials = createInput.value;
+
+        if (initials === null) {
+
+            console.log("No value entered!");
+
+        } else {
+            var finalScore = {
+                initials: initials,
+                score: timeRemaining
+            }
+            console.log(finalScore);
+            var allScores = localStorage.getItem("allScores");
+            if (allScores === null) {
+                allScores = [];
+            } else {
+                allScores = JSON.parse(allScores);
+            }
+            allScores.push(finalScore);
+            var newScore = JSON.stringify(allScores);
+            localStorage.setItem("allScores", newScore);
+            // Travels to final page
+            window.location.replace("./highscore.html");
+        }
+    });
 }
+
+
+
+
+
 
