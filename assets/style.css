@@ -42,6 +42,13 @@ button {
 }
 
 /* ID Selector */
+#currentTime {
+    float: right;
+}
+
+#questionsDiv {
+    margin: 30px;
+}
 
 
 
