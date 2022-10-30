@@ -63,8 +63,34 @@ li:hover {
     margin: 30px;
 }
 
-#submit {
+#clear {
+    position: relative;
+    padding: 10px;
+    font-size: 20px;
+    top: 40%;
+    left: 35%;
+    text-align: center;
+}
+
+#clear:hover {
     background-color: #ffb703;
+    transition: 0.7s;
+}
+
+#goBack {
+    position: relative;
+    padding: 10px;
+    font-size: 20px;
+    top: 40%;
+    left: 30%;
+    width: auto;
+    text-align: center;
+    text-decoration: none;
+}
+
+#goBack:hover {
+    background-color: #ffb703;
+    transition: 0.7s;
 }
 
 
