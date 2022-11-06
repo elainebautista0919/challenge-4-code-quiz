@@ -7,7 +7,7 @@ The goal is to implement a quiz application using HTML, CSS and Javascript. The 
 # Links
 
 This project has been deployed to Github pages. Links are listed below:
-* [Github Repository] (https://github.com/elainebautista0919/challenge-4-code-quiz)
-* [Github Page] (https://elainebautista0919.github.io/challenge-4-code-quiz/)
+* [Github Repository] (https://github.com/elainebautista0919/code-quiz)
+* [Github Page] (https://elainebautista0919.github.io/code-quiz/)
 * [Code Quiz Screenshot]<img src = ./assets/images/codequiz.png>
 * [High Score Screenshot]<img src = ./assets/images/highscore.png>
